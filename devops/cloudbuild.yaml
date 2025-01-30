@@ -1,0 +1,43 @@
+options:
+  logging: CLOUD_LOGGING_ONLY  # Si vous voulez que les logs vont dans Cloud Logging seulement
+  default_logs_bucket_behavior: REGIONAL_USER_OWNED_BUCKET  # Crée un bucket automatiquement
+
+substitutions:
+  _REGION: "us-central1"
+  _PROJECT_ID: "tp-note-449407"
+  _REPO_NAME: "website-tools"
+  _IMAGE_NAME: "image-wordpress"
+  _TAG: "latest"
+
+steps:
+
+  # Étape Docker : Build de l'image Docker
+  - name: 'docker'
+    id: 'Build Docker Image'
+    entrypoint: 'sh'
+    args:
+      - '-c'
+      - |
+        docker build -t $_REGION-docker.pkg.dev/$_PROJECT_ID/$_REPO_NAME/$_IMAGE_NAME:$_TAG .
+
+  # Étape Docker : Push de l'image Docker
+  - name: 'docker'
+    id: 'Push Docker Image'
+    entrypoint: 'sh'
+    args:
+      - '-c'
+      - |
+        docker push $_REGION-docker.pkg.dev/$_PROJECT_ID/$_REPO_NAME/$_IMAGE_NAME:$_TAG
+
+    #Étape Terraform : Init, Plan et Apply
+  - name: 'hashicorp/terraform:latest'
+    id: 'Terraform Init and Apply'
+    entrypoint: 'sh'
+    args:
+      - '-c'
+      - |
+        cd terraform/environments/dev
+        terraform init
+        terraform plan
+        terraform apply -auto-approve
+
