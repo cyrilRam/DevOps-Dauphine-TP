@@ -1,0 +1,29 @@
+# Default values for the Helm chart
+
+# Application configuration
+app:
+  name: wordpress
+  image:
+    repository: wordpress
+    tag: latest
+  environment: DEV
+  replicas: 2
+
+# Kubernetes configuration
+kubernetes:
+  namespace: default
+
+# Resource requests/limits
+resources:
+  requests:
+    memory: "256Mi"
+    cpu: "250m"
+  limits:
+    memory: "512Mi"
+    cpu: "500m"
+
+# Service configuration
+service:
+  type: LoadBalancer
+  port: 80
+  targetPort: 8000

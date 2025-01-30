@@ -87,7 +87,7 @@ ii. Quelles sont les différents fichiers html contenu dans WORKDIR ?
 
 `docker ps` -> id = 3cccf2a01e24
 
-`docker rm` -f 3cccf2a01e24
+`docker rm -f 3cccf2a01e24`
 
 `docker run -d -p 8000:80 wordpress`
 
@@ -240,11 +240,28 @@ Notre but, ne l'oublions pas est de déployer wordpress sur Cloud Run puis Kuber
 
    4. Rendez vous sur l'adresse IP publique du service kubernetes Wordpress et vérifiez que Wordpress fonctionne 🔥
 
+Le déploiement fonctionne :
+
+![capture](images/3.6.bis.png)
+
+![capture](images/3.6.png)
 
 ## BONUS : Partie 4
 
 1. Utiliser Cloud Build pour appliquer les changements d'infrastructure
+
+`voir code avec la partie terraform apply dans le fichier cloudbuild`
+
 2. Quelles critiques du TP pouvez vous faire ? Quels sont les éléments redondants de notre configuration ?
-   1. Quels paramètres avons nous dû recopier plusieurs fois ? Comment pourrions nous faire pour ne pas avoir à les recopier ?
+Quels paramètres avons nous dû recopier plusieurs fois ? Comment pourrions nous faire pour ne pas avoir à les recopier ?
+
+`J'ai construit le terraform de manière à avoir toutes les varaiables qu'on utilise plusieurs fois seulement dans le fichier main
+`
+
    2. Quel outil pouvons nous utiliser pour déployer Wordpress sur Kubernetes ? Faites les changements nécessaires dans votre code Terraform.
+
+`Nous pouvons utiliser le helm. Voir le code. J'ai pas généré le helm dans le terraform`
+
    3. Comment pourrions nous enlever le mot de passe en clair dans notre code Terraform ? Quelle ressource Kubernetes pouvons nous utiliser pour le stocker ? Faites les changements nécessaires dans votre code Terraform.
+
+`Voir le code terraform. J'ai utilisé un générateur random de mdp que j'ai ensuite mis dans un secret k8s. J'ai tout mis toute la config de la db dans secrets pour plus de simplicite`
