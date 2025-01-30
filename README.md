@@ -42,25 +42,25 @@ STATUS: RUNNABLE
 ## 4. (A faire en même temps que le 3.) Créer un cluster GKE avec un nouveau terminal
 
 ```bash
-gcloud container clusters create gke-dauphine --num-nodes=2 --zone=us-central1-a --machine-type=e2-standard-2
+gcloud container clusters create gke_sql-dauphine --num-nodes=2 --zone=us-central1-a --machine-type=e2-standard-2
 ```
 
 Vous devriez avoir la résultat :
 ```bash
 Note: The Kubelet readonly port (10255) is now deprecated. Please update your workloads to use the recommended alternatives. See https://cloud.google.com/kubernetes-engine/docs/how-to/disable-kubelet-readonly-port for ways to check usage and for migration instructions.
 Note: Your Pod address range (`--cluster-ipv4-cidr`) can accommodate at most 1008 node(s).
-Creating cluster gke-dauphine in us-central1-a
+Creating cluster gke_sql-dauphine in us-central1-a
 ```
 
 Puis au bout d'un moment :
 
 ```bash
-```NAME: gke-dauphine
+```NAME: gke_sql-dauphine
 LOCATION: us-central1-a
-MASTER_VERSION: 1.31.4-gke.1183000
+MASTER_VERSION: 1.31.4-gke_sql.1183000
 MASTER_IP: 34.30.183.4
 MACHINE_TYPE: e2-standard-2
-NODE_VERSION: 1.31.4-gke.1183000
+NODE_VERSION: 1.31.4-gke_sql.1183000
 NUM_NODES: 2
 STATUS: RUNNING
 ```
